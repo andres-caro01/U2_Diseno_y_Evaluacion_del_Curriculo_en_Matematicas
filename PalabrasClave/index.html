@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Far Cry 3 Word Cloud</title>
+    <title>Currículo: The Definition of Insanity</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap');
 
@@ -15,8 +15,8 @@
         body {
             background-color: #050505;
             background-image: 
-                radial-gradient(circle at center, rgba(255, 78, 0, 0.05) 0%, transparent 70%),
-                url("https://www.transparenttextures.com/patterns/asfalt-dark.png"); /* Textura de suciedad */
+                radial-gradient(circle at center, rgba(255, 78, 0, 0.07) 0%, transparent 70%),
+                url("https://www.transparenttextures.com/patterns/asfalt-dark.png");
             color: white;
             display: flex;
             justify-content: center;
@@ -28,99 +28,93 @@
             text-transform: uppercase;
         }
 
-        .container {
+        .word-cloud {
             position: relative;
-            max-width: 900px;
-            padding: 50px;
+            max-width: 1000px;
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 20px;
-            transform: skewY(-2deg); /* Inclinación agresiva típica del juego */
+            align-items: center;
+            gap: 30px;
+            padding: 20px;
+            transform: rotate(-1deg);
         }
 
         .word {
             position: relative;
             cursor: pointer;
-            transition: all 0.2s ease;
-            animation: glitch-entry 0.8s ease-out both;
-            letter-spacing: 2px;
-            color: #fff;
-            text-shadow: 2px 2px 0px #000;
+            transition: all 0.15s ease;
+            animation: entry 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+            letter-spacing: 1px;
+            display: inline-block;
+            user-select: none;
         }
 
-        /* Variación de tamaños */
-        .size-xl { font-size: 5rem; z-index: 5; }
-        .size-lg { font-size: 3.5rem; opacity: 0.9; }
-        .size-md { font-size: 2rem; opacity: 0.7; color: #bbb; }
+        /* Jerarquía de tamaños para simular nube */
+        .w-main { font-size: 4.5rem; color: #fff; z-index: 5; }
+        .w-med { font-size: 3rem; color: #ddd; opacity: 0.9; }
+        .w-small { font-size: 1.8rem; color: #aaa; opacity: 0.7; }
 
-        /* Efecto de Luces y "Locura" al pasar el mouse */
+        /* Efecto de Hover Psicodélico / Glitch */
         .word:hover {
-            color: var(--fc-yellow);
-            transform: scale(1.1) skewX(-10deg);
+            color: var(--fc-yellow) !important;
+            opacity: 1 !important;
+            transform: scale(1.15) skewX(-15deg);
             text-shadow: 
-                -3px 0 var(--fc-red), 
-                3px 0 var(--fc-orange);
-            filter: brightness(1.5) contrast(1.2);
-            z-index: 10;
+                -4px 0 var(--fc-red), 
+                4px 0 var(--fc-orange);
+            filter: brightness(1.3);
+            z-index: 100;
         }
 
-        /* Animación de entrada estilo "Interferencia" */
-        @keyframes glitch-entry {
+        /* Animación de entrada con desenfoque */
+        @keyframes entry {
             0% {
                 opacity: 0;
-                transform: translateX(-50px) skewX(20deg);
-                filter: blur(15px) brightness(3);
-            }
-            60% {
-                opacity: 1;
-                transform: translateX(5px) skewX(-10deg);
-                filter: blur(2px) brightness(1.5);
+                transform: scale(2) translateY(50px);
+                filter: blur(20px) brightness(2);
             }
             100% {
                 opacity: 1;
-                transform: translateX(0) skewX(0);
+                transform: scale(1) translateY(0);
                 filter: blur(0) brightness(1);
             }
         }
 
-        /* Efecto de parpadeo aleatorio (Interferencia de señal) */
-        .word:nth-child(3n) {
-            animation: flicker 4s infinite step-end;
+        /* Glitch aleatorio en algunas palabras */
+        .glitch-effect {
+            animation: glitch-anim 5s infinite step-end;
         }
 
-        @keyframes flicker {
-            0%, 95%, 100% { opacity: 1; }
-            96% { opacity: 0.2; transform: translateX(2px); color: var(--fc-red); }
-            98% { opacity: 0.8; transform: translateX(-2px); }
+        @keyframes glitch-anim {
+            0%, 90%, 100% { transform: none; filter: none; }
+            91% { transform: skew(10deg); filter: invert(1); }
+            92% { transform: translateX(-10px); color: var(--fc-red); }
+            95% { transform: skew(-10deg); filter: blur(2px); }
         }
 
-        /* El "Humo" o Niebla de fondo */
-        .smoke {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
-            opacity: 0.1;
+        /* Decoración de fondo */
+        .noise {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: url(https://media.giphy.com/media/oEI9uWUic8S1W/giphy.gif);
+            opacity: 0.03;
             pointer-events: none;
+            z-index: 10;
         }
     </style>
 </head>
 <body>
 
-    <div class="smoke"></div>
+    <div class="noise"></div>
 
-    <div class="container">
-        <span class="word size-xl" style="animation-delay: 0.1s;">Insania</span>
-        <span class="word size-md" style="animation-delay: 0.4s;">Vaas</span>
-        <span class="word size-lg" style="animation-delay: 0.2s;">Sobrevive</span>
-        <span class="word size-md" style="animation-delay: 0.6s;">Jungla</span>
-        <span class="word size-xl" style="animation-delay: 0.3s;">Tatau</span>
-        <span class="word size-lg" style="animation-delay: 0.5s;">Rook Island</span>
-        <span class="word size-md" style="animation-delay: 0.7s;">Sangre</span>
-        <span class="word size-xl" style="animation-delay: 0.2s;">Locura</span>
-        <span class="word size-md" style="animation-delay: 0.8s;">Caos</span>
-        <span class="word size-lg" style="animation-delay: 0.4s;">Fuego</span>
+    <div class="word-cloud">
+        <span class="word w-main glitch-effect" style="animation-delay: 0.1s;">Historia curricular</span>
+        <span class="word w-med" style="animation-delay: 0.3s;">nuevo currículo</span>
+        <span class="word w-main" style="animation-delay: 0.2s;">matemática moderna</span>
+        <span class="word w-med glitch-effect" style="animation-delay: 0.5s;">crisis de la matemática moderna</span>
+        <span class="word w-small" style="animation-delay: 0.4s;">estándares de matemáticas</span>
+        <span class="word w-main" style="animation-delay: 0.6s;">reforma curricular</span>
     </div>
 
 </body>
