@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Far Cry 3 Word Cloud</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap');
+
+        :root {
+            --fc-orange: #ff4e00;
+            --fc-yellow: #ffcc00;
+            --fc-red: #cc0000;
+        }
+
+        body {
+            background-color: #050505;
+            background-image: 
+                radial-gradient(circle at center, rgba(255, 78, 0, 0.05) 0%, transparent 70%),
+                url("https://www.transparenttextures.com/patterns/asfalt-dark.png"); /* Textura de suciedad */
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: 'Oswald', sans-serif;
+            overflow: hidden;
+            text-transform: uppercase;
+        }
+
+        .container {
+            position: relative;
+            max-width: 900px;
+            padding: 50px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            transform: skewY(-2deg); /* Inclinación agresiva típica del juego */
+        }
+
+        .word {
+            position: relative;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            animation: glitch-entry 0.8s ease-out both;
+            letter-spacing: 2px;
+            color: #fff;
+            text-shadow: 2px 2px 0px #000;
+        }
+
+        /* Variación de tamaños */
+        .size-xl { font-size: 5rem; z-index: 5; }
+        .size-lg { font-size: 3.5rem; opacity: 0.9; }
+        .size-md { font-size: 2rem; opacity: 0.7; color: #bbb; }
+
+        /* Efecto de Luces y "Locura" al pasar el mouse */
+        .word:hover {
+            color: var(--fc-yellow);
+            transform: scale(1.1) skewX(-10deg);
+            text-shadow: 
+                -3px 0 var(--fc-red), 
+                3px 0 var(--fc-orange);
+            filter: brightness(1.5) contrast(1.2);
+            z-index: 10;
+        }
+
+        /* Animación de entrada estilo "Interferencia" */
+        @keyframes glitch-entry {
+            0% {
+                opacity: 0;
+                transform: translateX(-50px) skewX(20deg);
+                filter: blur(15px) brightness(3);
+            }
+            60% {
+                opacity: 1;
+                transform: translateX(5px) skewX(-10deg);
+                filter: blur(2px) brightness(1.5);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0) skewX(0);
+                filter: blur(0) brightness(1);
+            }
+        }
+
+        /* Efecto de parpadeo aleatorio (Interferencia de señal) */
+        .word:nth-child(3n) {
+            animation: flicker 4s infinite step-end;
+        }
+
+        @keyframes flicker {
+            0%, 95%, 100% { opacity: 1; }
+            96% { opacity: 0.2; transform: translateX(2px); color: var(--fc-red); }
+            98% { opacity: 0.8; transform: translateX(-2px); }
+        }
+
+        /* El "Humo" o Niebla de fondo */
+        .smoke {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
+            opacity: 0.1;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="smoke"></div>
+
+    <div class="container">
+        <span class="word size-xl" style="animation-delay: 0.1s;">Insania</span>
+        <span class="word size-md" style="animation-delay: 0.4s;">Vaas</span>
+        <span class="word size-lg" style="animation-delay: 0.2s;">Sobrevive</span>
+        <span class="word size-md" style="animation-delay: 0.6s;">Jungla</span>
+        <span class="word size-xl" style="animation-delay: 0.3s;">Tatau</span>
+        <span class="word size-lg" style="animation-delay: 0.5s;">Rook Island</span>
+        <span class="word size-md" style="animation-delay: 0.7s;">Sangre</span>
+        <span class="word size-xl" style="animation-delay: 0.2s;">Locura</span>
+        <span class="word size-md" style="animation-delay: 0.8s;">Caos</span>
+        <span class="word size-lg" style="animation-delay: 0.4s;">Fuego</span>
+    </div>
+
+</body>
+</html>
