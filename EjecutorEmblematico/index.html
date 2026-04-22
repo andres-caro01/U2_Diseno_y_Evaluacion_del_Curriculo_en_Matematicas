@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edward G. Begle - Perfil Corregido</title>
+    <title>Edward G. Begle - Perfil Blue</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Great+Vibes&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #2c3e50;
-            --accent: #ff7e67;
+            --accent: #483C9A; /* El nuevo azul solicitado */
             --bg-color: #f4f7f6;
             --text-color: #444;
             --card-bg: #ffffff;
@@ -48,13 +48,13 @@
             flex-direction: row;
             max-width: 900px;
             overflow: hidden;
-            border-left: 8px solid var(--accent);
+            border-left: 8px solid var(--accent); /* Borde lateral azul */
             animation: fadeInUp var(--anim-duration) var(--anim-ease) forwards;
         }
 
         /* --- Sección de Imagen (Izquierda) --- */
         .image-section {
-            background: #eef2f3;
+            background: #f0efff; /* Fondo ligeramente azulado */
             flex: 1;
             padding: 40px;
             display: flex;
@@ -64,10 +64,9 @@
             border-right: 1px solid #eee;
         }
 
-        /* Contenedor de la firma y la fuente, alineado a la derecha */
         .signature-container {
-            width: 250px; /* Mismo ancho que la imagen */
-            text-align: right; /* Alinea el texto a la derecha */
+            width: 250px;
+            text-align: right;
             margin-top: 10px;
             opacity: 0;
             animation: fadeInUp var(--anim-duration) var(--anim-ease) forwards;
@@ -79,7 +78,7 @@
             height: 320px;
             object-fit: cover;
             border-radius: 15px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+            box-shadow: 0 10px 20px rgba(72, 60, 154, 0.2); /* Sombra con toque azul */
             background-color: #ddd;
             opacity: 0;
             animation: fadeInZoom var(--anim-duration) var(--anim-ease) forwards;
@@ -94,13 +93,11 @@
             line-height: 1;
         }
 
-        /* --- NUEVO ESTILO PARA LA FUENTE CORREGIDA --- */
         .image-source {
-            font-size: 0.75em; /* Pequeño y discreto */
-            color: #888; /* Color gris suave */
-            margin-top: 8px; /* Espacio con el nombre */
+            font-size: 0.75em;
+            color: #888;
+            margin-top: 8px;
             font-weight: 300;
-            text-align: center;
         }
 
         /* --- Sección de Contenido (Derecha) --- */
@@ -115,13 +112,12 @@
             margin-bottom: 25px;
         }
 
-        /* Retrasos escalonados para el texto */
         .block-1 { animation-delay: 0.7s; }
         .block-2 { animation-delay: 0.9s; }
         .block-3 { animation-delay: 1.1s; }
 
         h2 {
-            color: var(--accent);
+            color: var(--accent); /* Títulos en azul */
             font-size: 1.4em;
             margin-top: 0;
             margin-bottom: 8px;
@@ -136,9 +132,10 @@
             line-height: 1.6;
             margin: 0;
             font-weight: 300;
+            text-align: left; /* Alineación a la izquierda para mejor legibilidad */
         }
 
-        /* --- Responsividad para móviles --- */
+        /* --- Responsividad --- */
         @media (max-width: 768px) {
             .card { flex-direction: column; }
             .image-section { border-right: none; border-bottom: 1px solid #eee; padding: 30px; }
@@ -156,7 +153,6 @@
             <img src="Personaje.png" alt="Edward G. Begle" class="personaje-img">
             
             <div class="signature-container">
-                <br>
                 <h1 class="signature">Edward G. Begle</h1>
                 <div class="image-source">Fuente: (Gemini, 2026).</div>
             </div>
