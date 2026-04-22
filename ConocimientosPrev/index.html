@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo Curricular Futurista</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #030712;
+            --accent-blue: #0ea5e9;
+            --glass-bg: rgba(15, 23, 42, 0.8);
+            --neon-glow: rgba(14, 165, 233, 0.4);
+            --font-size: 17px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            background-image: 
+                linear-gradient(rgba(14, 165, 233, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(14, 165, 233, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+            font-family: 'Poppins', sans-serif;
+            font-size: var(--font-size);
+            color: #f1f5f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* Contenedor con distribución obligatoria 2x1 en Desktop */
+        .grid-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* 2 Columnas */
+            gap: 30px;
+            width: 100%;
+            max-width: 1300px;
+            perspective: 1500px;
+        }
+
+        /* Tarjeta Alargada */
+        .card {
+            background: var(--glass-bg);
+            border: 1px solid rgba(14, 165, 233, 0.3);
+            border-radius: 15px;
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform-style: preserve-3d;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            animation: fadeIn 1s ease-out both;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px) rotateX(-5deg); }
+            to { opacity: 1; transform: translateY(0) rotateX(0); }
+        }
+
+        /* Efecto de Escaneo (Animaciónes Espectaculares) */
+        .card::after {
+            content: "";
+            position: absolute;
+            top: -100%;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                to bottom,
+                transparent,
+                rgba(14, 165, 233, 0.1),
+                transparent
+            );
+            animation: scan 4s infinite linear;
+        }
+
+        @keyframes scan {
+            0% { top: -100%; }
+            100% { top: 100%; }
+        }
+
+        /* Hover 3D */
+        .card:hover {
+            transform: translateZ(20px) scale(1.02);
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 50px var(--neon-glow);
+        }
+
+        h2 {
+            color: var(--accent-blue);
+            font-size: 1.6rem;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-bottom: 2px solid var(--accent-blue);
+            display: inline-block;
+            padding-right: 20px;
+        }
+
+        p {
+            margin-bottom: 20px;
+            font-weight: 300;
+            line-height: 1.8;
+            text-align: left;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        li {
+            margin-bottom: 25px;
+            padding-left: 20px;
+            border-left: 3px solid var(--accent-blue);
+            text-align: left;
+            transition: 0.3s;
+        }
+
+        li:hover {
+            background: rgba(14, 165, 233, 0.1);
+            padding-left: 30px;
+        }
+
+        strong {
+            color: var(--accent-blue);
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        /* RESPONSIVO: 1x2 en teléfonos */
+        @media (max-width: 900px) {
+            .grid-container {
+                grid-template-columns: 1fr; /* 1 Columna */
+                grid-template-rows: auto auto; /* 2 Filas */
+            }
+            
+            body {
+                padding: 40px 20px;
+                overflow-y: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="grid-container">
+        <div class="card" style="animation-delay: 0.2s;">
+            <h2>Conocimientos previos</h2>
+            <p>Para abordar con éxito la Unidad 2, el estudiante deberá demostrar un manejo sólido de los siguientes conocimientos:</p>
+            <ul>
+                <li>
+                    <strong>Fundamentos de teoría curricular:</strong>
+                    entendimiento de los conceptos básicos de currículo (formal, real, oculto), sus elementos y sus modelos de diseño (por objetivos, por competencias).
+                </li>
+                <li>
+                    <strong>Estructura del sistema educativo colombiano:</strong>
+                    conocimiento de los niveles de educación y las normativas educativas centrales (Ley 115, 1994).
+                </li>
+                <li>
+                    <strong>Concepto de competencia matemática:</strong>
+                    comprensión de qué implica la "competencia" en el contexto educativo (saber, saber hacer y saber ser).
+                </li>
+                <li>
+                    <strong>Terminología de la Unidad 1:</strong>
+                    manejo de los conceptos clave sobre la naturaleza y los fines de la educación matemática.
+                </li>
+            </ul>
+        </div>
+
+        <div class="card" style="animation-delay: 0.5s;">
+            <h2>Resultados de aprendizaje</h2>
+            <p>Al finalizar esta unidad, el estudiante estará en capacidad de:</p>
+            <ul>
+                <li>
+                    <strong>Reformas y Didáctica:</strong>
+                    Identificar y fundamentar los principales movimientos de reforma curricular (Matemática Moderna, Vuelta a lo Básico, Movimiento de Estándares) y su impacto en la didáctica global.
+                </li>
+                <li>
+                    <strong>Contexto Nacional e Internacional:</strong>
+                    Relacionar los hitos históricos de la reforma curricular internacional con los momentos clave en el desarrollo de los documentos curriculares colombianos y analizar marcos como PISA y TIMSS.
+                </li>
+                <li>
+                    <strong>Estructura Curricular Colombiana:</strong>
+                    Describir y argumentar la organización del currículo colombiano a partir de los EBC, los cinco Tipos de Pensamiento Matemático y su relación con los DBA.
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</body>
+</html>
