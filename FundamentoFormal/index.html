@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        :root {
+            --primary-math: #1a3a5f;
+            --secondary-math: #4a90e2;
+            --accent-math: #f39c12;
+            --bg-light: #f8f9fa;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-light);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            min-height: 100vh;
+            margin: 0;
+            padding-bottom: 80px; /* Espacio para la barra flotante */
+            box-sizing: border-box;
+        }
+
+        /* Contenedor de la Flip Card */
+        .flip-card {
+            background-color: transparent;
+            width: 300px;
+            height: 400px;
+            perspective: 1000px;
+        }
+
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            border-radius: 15px;
+        }
+
+        /* Clase controlada por JavaScript para el giro */
+        .flip-card-inner.is-flipped {
+            transform: rotateY(180deg);
+        }
+
+        /* Caras de la tarjeta */
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 25px;
+            box-sizing: border-box;
+        }
+
+        /* Estilo Frontal (Título) */
+        .flip-card-front {
+            background: linear-gradient(135deg, var(--primary-math) 0%, #0d1b2a 100%);
+            color: white;
+            border: 2px solid var(--secondary-math);
+        }
+
+        .flip-card-front h2 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Icono decorativo matemático */
+        .math-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            opacity: 0.8;
+        }
+
+        /* Estilo Trasero (Contenido) */
+        .flip-card-back {
+            background-color: white;
+            color: #333;
+            transform: rotateY(180deg);
+            border: 2px solid var(--primary-math);
+            text-align: left;
+        }
+
+        .flip-card-back p {
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        .flip-card-back::before {
+            content: "∑";
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 4rem;
+            color: rgba(26, 58, 95, 0.05);
+            font-weight: bold;
+        }
+
+        .indicator {
+            font-size: 0.8rem;
+            margin-top: 20px;
+            color: var(--accent-math);
+            font-weight: bold;
+        }
+
+        /* Barra de instrucción flotante */
+        .floating-instruction {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--primary-math);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            font-weight: bold;
+            font-size: 1rem;
+            z-index: 1000;
+            border: 2px solid var(--secondary-math);
+            text-align: center;
+            pointer-events: none; /* No interfiere con los clics en las tarjetas si están detrás */
+        }
+
+    </style>
+    <title>Bourbaki Cards - Clic para Voltear</title>
+</head>
+<body>
+
+    <div class="flip-card">
+        <div class="flip-card-inner">
+            <div class="flip-card-front">
+                <div class="math-icon">∅</div>
+                <h2>Identidad</h2>
+                <div class="indicator">HAGA CLIC</div>
+            </div>
+            <div class="flip-card-back">
+                <h3>Bourbaki</h3>
+                <p>No es un individuo, sino un grupo de matemáticos franceses (creado en 1935), que buscaba refundar toda la matemática sobre una base rigurosamente formal y unificada.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="flip-card">
+        <div class="flip-card-inner">
+            <div class="flip-card-front">
+                <div class="math-icon">∫</div>
+                <h2>Influencia Curricular</h2>
+                <div class="indicator">HAGA CLIC</div>
+            </div>
+            <div class="flip-card-back">
+                <h3>Estructuras</h3>
+                <p>Sus trabajos sobre estructuras fundamentales (algebraicas, de orden y topológicas) fueron el esqueleto del currículo escolar. La idea era que, enseñando estas formas, el estudiante comprendería la unidad de las matemáticas.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="flip-card">
+        <div class="flip-card-inner">
+            <div class="flip-card-front">
+                <div class="math-icon">≠</div>
+                <h2>Crítica</h2>
+                <div class="indicator">HAGA CLIC</div>
+            </div>
+            <div class="flip-card-back">
+                <h3>Abstracción</h3>
+                <p>La abstracción excesiva fue su perdición curricular. La Teoría de Conjuntos resultó pedagógicamente ineficaz para niños, ya que desdibujaba la aritmética y las aplicaciones tradicionales.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="floating-instruction">
+        Haga clic sobre las tarjetas para ampliar la información
+    </div>
+
+    <script>
+        // Seleccionamos todos los contenedores internos de las tarjetas
+        const cards = document.querySelectorAll('.flip-card-inner');
+
+        // Añadimos un evento de clic a cada una
+        cards.forEach(card => {
+            card.addEventListener('click', function() {
+                // Alternamos la clase 'is-flipped' al hacer clic
+                this.classList.toggle('is-flipped');
+            });
+        });
+    </script>
+
+</body>
+</html>
