@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slider Pedagógico Estable</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --card-dark: #1e293b;
+            --accent-blue: #38bdf8;
+            --text-main: #f1f5f9;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        .main-wrapper {
+            width: 100%;
+            max-width: 1000px;
+            position: relative;
+        }
+
+        /* Instrucción Flotante */
+        .instruction-badge {
+            position: absolute;
+            top: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(56, 189, 248, 0.1);
+            color: var(--accent-blue);
+            padding: 8px 20px;
+            border: 1px solid var(--accent-blue);
+            border-radius: 50px;
+            font-size: 0.8rem;
+            white-space: nowrap;
+            z-index: 10;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(-50%, 0); }
+            50% { transform: translate(-50%, -10px); }
+        }
+
+        .swiper {
+            width: 100%;
+            padding: 20px 0 50px 0;
+        }
+
+        .swiper-slide {
+            background: var(--card-dark);
+            border-radius: 24px;
+            border-left: 8px solid var(--accent-blue);
+            padding: 40px;
+            box-sizing: border-box;
+            height: auto;
+            opacity: 0.5;
+            transform: scale(0.9);
+            transition: all 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        /* Enfoque en la tarjeta activa */
+        .swiper-slide-active {
+            opacity: 1;
+            transform: scale(1);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        h2 { color: var(--accent-blue); font-size: 1.4rem; margin: 0 0 15px 0; font-weight: 600; }
+        p { line-height: 1.8; color: var(--text-main); margin: 0; font-size: 1rem; }
+        strong { color: var(--accent-blue); }
+
+        /* Controles */
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 10px;
+        }
+
+        .btn {
+            background: var(--card-dark);
+            border: 2px solid var(--accent-blue);
+            color: var(--accent-blue);
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.3s;
+            z-index: 20;
+        }
+
+        .btn:hover {
+            background: var(--accent-blue);
+            color: var(--bg-dark);
+            box-shadow: 0 0 15px var(--accent-blue);
+        }
+
+        .btn svg { width: 28px; height: 28px; fill: none; stroke: currentColor; stroke-width: 2.5; }
+
+        /* Responsividad */
+        @media (max-width: 768px) {
+            .swiper-slide { width: 90%; padding: 25px; }
+            .instruction-badge { font-size: 0.7rem; top: -40px; }
+        }
+
+        @media (min-width: 769px) {
+            .swiper-slide { width: 500px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main-wrapper">
+        <div class="instruction-badge">Haga clic sobre los botones para interactuar</div>
+
+        <div class="swiper mySwiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <h2>Autor/Institución: MEN</h2>
+                    <p><strong>Definición:</strong> son el nivel de concreción de los EBC. Mientras los EBC definen la meta por ciclo (ej. 4°-5°), los DBA definen los aprendizajes esenciales y observables por grado.</p>
+                </div>
+
+                <div class="swiper-slide">
+                    <h2>Rol pedagógico</h2>
+                    <p>Los DBA son la herramienta más valiosa para el docente en el aula. Indican de forma clara y concisa lo que un estudiante debe ser capaz de hacer al final de un año escolar para asegurar su progresión. Incluyen evidencias de aprendizaje que guían la planeación.</p>
+                </div>
+
+                <div class="swiper-slide">
+                    <h2>Vínculo curricular</h2>
+                    <p>Los DBA aseguran que la Comprensión Relacional (Skemp, 1976) y la Resolución de Problemas (Pólya/Schoenfeld) se conviertan en acciones didácticas específicas, al especificar tareas que requieren razonamiento, no solo cálculo.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button class="btn btn-p">
+                <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+            </button>
+            <button class="btn btn-n">
+                <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+            </button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        const swiper = new Swiper(".mySwiper", {
+            // Configuración de inicio
+            initialSlide: 0,
+            slidesPerView: "auto",
+            centeredSlides: true,
+            spaceBetween: 30,
+            
+            // Eliminamos 'loop: true' para evitar el bug del rebote
+            // En su lugar, usamos 'rewind' para que al llegar al final vuelva al inicio suavemente
+            rewind: true, 
+            
+            grabCursor: true,
+            speed: 800,
+            
+            navigation: {
+                nextEl: ".btn-n",
+                prevEl: ".btn-p",
+            },
+
+            // Evita cortes en el renderizado
+            watchSlidesProgress: true,
+            
+            // Forzar actualización al cargar
+            observer: true,
+            observeParents: true,
+        });
+    </script>
+</body>
+</html>
