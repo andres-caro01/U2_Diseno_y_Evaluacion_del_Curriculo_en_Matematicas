@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Críticas a la Reforma Matemática (Estilo Apple Moderno)</title>
+    <style>
+        /* --- ESTILOS INSPIRADOS EN APPLE MODERNO --- */
+        :root {
+            --apple-bg: #f5f5f7; 
+            --apple-card-bg: rgba(255, 255, 255, 0.85); 
+            --apple-text: #1d1d1f; 
+            --apple-text-secondary: #86868b; 
+            --apple-blue: #0071e3; 
+            --apple-red: #ff3b30; 
+            --apple-green: #34c759; 
+            --modal-overlay: rgba(0, 0, 0, 0.4); 
+            --card-radius: 28px; 
+            --shadow-subtle: 0 4px 12px rgba(0,0,0,0.05); 
+            --shadow-hover: 0 10px 20px rgba(0,0,0,0.1); 
+            --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--apple-bg);
+            color: var(--apple-text);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 80px 40px 40px 40px; /* Espacio extra arriba para la instrucción */
+            position: relative;
+        }
+
+        /* --- INSTRUCCIÓN FLOTANTE --- */
+        .floating-instruction {
+            position: fixed;
+            top: 25px;
+            right: 40px;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 12px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--apple-text-secondary);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: var(--shadow-subtle);
+            z-index: 100;
+            pointer-events: none; /* No interfiere con clics */
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Contenedor de Tarjetas */
+        .card-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+            max-width: 1400px;
+            width: 100%;
+        }
+
+        /* Tarjeta Individual */
+        .card {
+            background: var(--apple-card-bg);
+            border-radius: var(--card-radius);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 30px;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: var(--shadow-subtle);
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: var(--shadow-hover);
+        }
+
+        /* Imágenes de Cabecera */
+        .card-image-area {
+            height: 140px;
+            border-radius: calc(var(--card-radius) - 10px);
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-1 .card-image-area { background: linear-gradient(135deg, #00C6FB, #005BEA); }
+        .card-2 .card-image-area { background: linear-gradient(135deg, #30cfd0, #330867); }
+        .card-3 .card-image-area { background: linear-gradient(135deg, #ff9a9e, #fad0c4); }
+
+        .card-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+            color: var(--apple-text);
+        }
+
+        .arrow-icon {
+            font-size: 20px;
+            margin-right: 12px;
+            color: var(--apple-text);
+        }
+
+        .card-action {
+            font-size: 0.95rem;
+            color: var(--apple-blue);
+            text-align: right;
+            margin-top: auto;
+            font-weight: 600;
+            padding-top: 20px;
+        }
+
+        /* --- Estilos Modal --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--modal-overlay);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+        }
+
+        .modal-overlay.open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: var(--card-radius);
+            padding: 50px;
+            max-width: 650px;
+            width: 90%;
+            position: relative;
+            transform: scale(0.9);
+            transition: var(--transition);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.1);
+        }
+
+        .modal-overlay.open .modal-content {
+            transform: scale(1);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 25px;
+            right: 30px;
+            font-size: 24px;
+            color: var(--apple-text-secondary);
+            cursor: pointer;
+            transition: var(--transition);
+            background: #e1e1e3;
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .close-modal:hover { background: #cdcdcf; color: var(--apple-text); }
+
+        .modal-body h2 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+        }
+
+        .modal-body p {
+            font-size: 1.25rem;
+            line-height: 1.7;
+            font-weight: 300;
+            text-align: justify;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="floating-instruction">
+        <span>💡</span> Haga clic sobre las tarjetas para ampliar la información
+    </div>
+
+    <div class="card-container">
+        <div class="card card-1" onclick="openModal('modal1')">
+            <div class="card-image-area"><span>∑(x²)</span></div>
+            <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                <span class="arrow-icon">&#10142;</span>
+                <h3 class="card-title">Abstracción sin motivación</h3>
+            </div>
+            <p class="card-action">Ver detalle...</p>
+        </div>
+
+        <div class="card card-2" onclick="openModal('modal2')">
+            <div class="card-image-area"><span>∆(t)</span></div>
+            <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                <span class="arrow-icon">&#10142;</span>
+                <h3 class="card-title">Visión ahistórica</h3>
+            </div>
+            <p class="card-action">Ver detalle...</p>
+        </div>
+
+        <div class="card card-3" onclick="openModal('modal3')">
+            <div class="card-image-area"><span>π</span></div>
+            <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                <span class="arrow-icon">&#10142;</span>
+                <h3 class="card-title">Enfoque en el profesor</h3>
+            </div>
+            <p class="card-action">Ver detalle...</p>
+        </div>
+    </div>
+
+    <div id="modal1" class="modal-overlay" onclick="closeModal(event, 'modal1')">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal(event, 'modal1')">&times;</button>
+            <div class="modal-body">
+                <h2><span class="arrow-icon" style="color: var(--apple-blue);">&#10142;</span>Abstracción sin motivación</h2>
+                <p>La reforma ignoró el aspecto intuitivo y aplicado de las matemáticas, presentando axiomas y estructuras sin contexto histórico o utilidad práctica, resultando aburrido y sin sentido para el estudiante.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal2" class="modal-overlay" onclick="closeModal(event, 'modal2')">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal(event, 'modal2')">&times;</button>
+            <div class="modal-body">
+                <h2><span class="arrow-icon" style="color: var(--apple-green);">&#10142;</span>Visión ahistórica</h2>
+                <p>Kline argumentó que la matemática nace de la experiencia y la necesidad de resolver problemas concretos. La enseñanza debe seguir el desarrollo histórico-cultural de la disciplina (del concreto al abstracto).</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal3" class="modal-overlay" onclick="closeModal(event, 'modal3')">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal(event, 'modal3')">&times;</button>
+            <div class="modal-body">
+                <h2><span class="arrow-icon" style="color: var(--apple-red);">&#10142;</span>Enfoque en el profesor</h2>
+                <p>Sostuvo que el nuevo currículo era escrito por matemáticos para matemáticos, sin entender las necesidades pedagógicas y la formación de los profesores de escuela.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(event, modalId) {
+            if (event.target.classList.contains('modal-overlay') || event.target.classList.contains('close-modal')) {
+                document.getElementById(modalId).classList.remove('open');
+                document.body.style.overflow = '';
+            }
+        }
+    </script>
+</body>
+</html>
