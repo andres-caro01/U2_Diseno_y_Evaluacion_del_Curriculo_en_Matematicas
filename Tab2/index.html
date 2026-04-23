@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabla Curricular de Pensamientos Matemáticos</title>
+    <style>
+        :root {
+            --primary: #2b4492;
+            --accent: #4a90e2;
+            --bg-body: #f4f7f9;
+            --row-alt: #e6f0ff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+            background-color: var(--bg-body);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .table-container {
+            width: 100%;
+            max-width: 1100px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+            overflow: hidden;
+            border: 1px solid rgba(43, 68, 146, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        /* Encabezado */
+        thead {
+            background: var(--primary);
+            color: white;
+        }
+
+        th {
+            padding: 22px;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 1.2px;
+            border-right: 1px solid rgba(255,255,255,0.1);
+        }
+
+        th:last-child { border-right: none; }
+
+        /* Celdas */
+        td {
+            padding: 20px;
+            font-size: 0.95rem;
+            color: #333;
+            border-bottom: 1px solid #e1e8ed;
+            line-height: 1.6;
+            vertical-align: middle;
+        }
+
+        /* Filas resaltadas (según la imagen original) */
+        tr:nth-child(even) {
+            background-color: var(--row-alt);
+        }
+
+        tr:hover {
+            background-color: #d9e6ff !important;
+            transition: all 0.3s ease;
+        }
+
+        .type-cell {
+            font-weight: 700;
+            color: var(--primary);
+            width: 20%;
+        }
+
+        /* --- ANIMACIONES --- */
+        
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        tbody tr {
+            opacity: 0;
+            animation: slideInRight 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+
+        /* Retraso para efecto cascada */
+        tbody tr:nth-child(1) { animation-delay: 0.1s; }
+        tbody tr:nth-child(2) { animation-delay: 0.3s; }
+        tbody tr:nth-child(3) { animation-delay: 0.5s; }
+        tbody tr:nth-child(4) { animation-delay: 0.7s; }
+        tbody tr:nth-child(5) { animation-delay: 0.9s; }
+
+    </style>
+</head>
+<body>
+
+<div class="table-container">
+    <table>
+        <thead>
+            <tr>
+                <th>Tipo de Pensamiento</th>
+                <th>Foco Curricular y Proceso Cognitivo</th>
+                <th>Vínculo con Autores/Paradigmas</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="type-cell">Numérico</td>
+                <td>Desarrollo del sentido numérico: estimación, comprensión de los subsistemas numéricos y las propiedades de las operaciones.</td>
+                <td>Skemp (Comprensión relacional); búsqueda de un equilibrio entre procedimiento y significado.</td>
+            </tr>
+            <tr>
+                <td class="type-cell">Espacial</td>
+                <td>Desarrollo de la visión espacial; uso de sistemas de coordenadas, geometría euclidiana y transformaciones (traslación, rotación, reflexión).</td>
+                <td>Tradición geométrica de Euclides; modelos de desarrollo del pensamiento geométrico (e.g., Van Hiele).</td>
+            </tr>
+            <tr>
+                <td class="type-cell">Métrico</td>
+                <td>Desarrollo del sentido de la medida: elección de la unidad adecuada, estimación de magnitudes y cálculo de áreas/volúmenes.</td>
+                <td>Fundamento de la matemática aplicada; énfasis en la modelización como proceso para medir y cuantificar el mundo.</td>
+            </tr>
+            <tr>
+                <td class="type-cell">Aleatorio</td>
+                <td>Desarrollo del pensamiento estadístico y probabilístico; recolección, organización e interpretación crítica de datos y estudio de la incertidumbre.</td>
+                <td>NCTM (Énfasis en datos y probabilidad); Wild y Pfannkuch (Ciclo de pensamiento estadístico).</td>
+            </tr>
+            <tr>
+                <td class="type-cell">Variacional</td>
+                <td>Análisis de la variación y la dependencia funcional a través de patrones, secuencias, funciones y sus representaciones.</td>
+                <td>Cantoral (Socio-Epistemología); Bruner (Currículo espiral); búsqueda de un enfoque más intuitivo y contextualizado del álgebra.</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>
