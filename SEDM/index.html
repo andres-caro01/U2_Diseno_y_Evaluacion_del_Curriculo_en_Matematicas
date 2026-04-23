@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interface Educativa Pro - Fondo Corregido</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --glass: rgba(255, 255, 255, 0.08);
+            --glass-border: rgba(255, 255, 255, 0.15);
+        }
+
+        /* --- Fondo Optimizado --- */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Poppins', sans-serif;
+            background-color: #030712; /* Fondo base más profundo */
+            /* Mezcla de gradientes para crear profundidad visual */
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(79, 70, 229, 0.2) 0px, transparent 45%),
+                radial-gradient(at 100% 0%, rgba(192, 38, 211, 0.12) 0px, transparent 40%),
+                radial-gradient(at 50% 50%, rgba(15, 23, 42, 1) 0px, transparent 80%),
+                radial-gradient(at 100% 100%, rgba(67, 56, 202, 0.15) 0px, transparent 45%),
+                radial-gradient(at 0% 100%, rgba(124, 58, 237, 0.12) 0px, transparent 45%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            color: white;
+        }
+
+        /* --- Instrucción Flotante --- */
+        .instruccion {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(8px);
+            padding: 8px 18px;
+            border-radius: 8px;
+            border: 1px solid var(--glass-border);
+            font-size: 0.75rem;
+            letter-spacing: 0.5px;
+            color: rgba(255, 255, 255, 0.6);
+            z-index: 100;
+        }
+
+        .main-wrapper {
+            width: 90%;
+            max-width: 850px;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            z-index: 1;
+        }
+
+        /* --- Navegación --- */
+        .nav-menu {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .nav-item {
+            padding: 10px 22px;
+            border: 1px solid var(--glass-border);
+            background: var(--glass);
+            color: rgba(255, 255, 255, 0.7);
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.4s ease;
+            text-align: center;
+        }
+
+        .nav-item.active {
+            background: white;
+            color: #000;
+            font-weight: 600;
+            border-color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        /* --- Tarjeta Contenedora --- */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(25px);
+            border-radius: 20px;
+            border: 1px solid var(--glass-border);
+            overflow: hidden;
+            box-shadow: 0 40px 100px rgba(0,0,0,0.4);
+        }
+
+        .slider-track {
+            display: flex;
+            width: 300%;
+            transition: transform 0.7s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        /* --- Contenido --- */
+        .slide {
+            width: 100%;
+            padding: 50px 60px;
+            box-sizing: border-box;
+            text-align: left;
+        }
+
+        .slide h2 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+            color: #fff;
+            position: relative;
+            display: inline-block;
+        }
+
+        .slide h2::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+
+        .slide p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.75);
+            font-weight: 300;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="instruccion">
+        Haga clic sobre los botones para ampliar la información.
+    </div>
+
+    <div class="main-wrapper">
+        <nav class="nav-menu">
+            <button class="nav-item active" onclick="move(0)">Modelo Unicista</button>
+            <button class="nav-item" onclick="move(1)">Práctica Social</button>
+            <button class="nav-item" onclick="move(2)">La Noción de Referencial</button>
+        </nav>
+
+        <div class="glass-card">
+            <div class="slider-track" id="track">
+                <div class="slide">
+                    <h2>Crítica al Modelo Unicista</h2>
+                    <p>La SEDM cuestiona la idea de que existe un único conocimiento matemático universal (el de la universidad) que simplemente debe "bajarse" a la escuela.</p>
+                </div>
+                <div class="slide">
+                    <h2>El conocimiento como práctica social</h2>
+                    <p>Sostiene que el conocimiento matemático es inseparable de las prácticas sociales en las que se genera, se usa y se valida. Por lo tanto, el currículo debe reconstruir o simular estas prácticas para que el aprendizaje sea significativo.</p>
+                </div>
+                <div class="slide">
+                    <h2>La noción de referencial</h2>
+                    <p>El conocimiento no es solo el objeto matemático (ej. la función f(x)=x²), sino el referencial (la actividad humana que le da sentido).</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function move(index) {
+            const track = document.getElementById('track');
+            const buttons = document.querySelectorAll('.nav-item');
+            track.style.transform = `translateX(-${index * (100 / 3)}%)`;
+            buttons.forEach((btn, i) => {
+                btn.classList.toggle('active', i === index);
+            });
+        }
+    </script>
+</body>
+</html>
