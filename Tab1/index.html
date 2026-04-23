@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabla de Pensamientos Matemáticos</title>
+    <style>
+        :root {
+            --primary: #2b4492;
+            --accent: #4a90e2;
+            --bg-light: #f8faff;
+            --row-alt: #f1f5ff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .table-container {
+            width: 100%;
+            max-width: 1000px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        /* Estilo de Encabezado */
+        thead {
+            background: var(--primary);
+            color: white;
+        }
+
+        th {
+            padding: 20px;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            border-bottom: 2px solid rgba(0,0,0,0.1);
+        }
+
+        /* Estilo de Celdas */
+        td {
+            padding: 18px 20px;
+            font-size: 0.95rem;
+            color: #444;
+            border-bottom: 1px solid #edf2f7;
+            line-height: 1.5;
+        }
+
+        tr:nth-child(even) {
+            background-color: var(--row-alt);
+        }
+
+        tr:hover {
+            background-color: #e2eaff !important;
+            transition: background 0.3s ease;
+        }
+
+        .type-cell {
+            font-weight: 700;
+            color: var(--primary);
+            width: 25%;
+        }
+
+        /* --- ANIMACIONES DE ENTRADA --- */
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        tbody tr {
+            opacity: 0; /* Inicialmente ocultos */
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        /* Retraso escalonado (Staggered delay) para cada fila */
+        tbody tr:nth-child(1) { animation-delay: 0.1s; }
+        tbody tr:nth-child(2) { animation-delay: 0.3s; }
+        tbody tr:nth-child(3) { animation-delay: 0.5s; }
+        tbody tr:nth-child(4) { animation-delay: 0.7s; }
+        tbody tr:nth-child(5) { animation-delay: 0.9s; }
+
+    </style>
+</head>
+<body>
+
+<div class="table-container">
+    <table>
+        <thead>
+            <tr>
+                <th>Tipo de Pensamiento</th>
+                <th>Foco Principal</th>
+                <th>Vínculo Curricular Global</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="type-cell">Numérico</td>
+                <td>Comprensión del número, sus representaciones, el significado de las operaciones y el sentido de cantidad.</td>
+                <td><strong>Back to Basics</strong> (con énfasis en comprensión relacional).</td>
+            </tr>
+            <tr>
+                <td class="type-cell">Geométrico (Espacial)</td>
+                <td>Construcción y manejo de representaciones del espacio, y reconocimiento de las propiedades de formas y figuras.</td>
+                <td>Estándares de Contenido (Geometría y Medida).</td>
+            </tr>
+            <tr>
+                <td class="type-cell">Métrico (Sistemas de Medida)</td>
+                <td>Comprensión de atributos medibles, unidades, procesos de medición y estimación.</td>
+                <td>Estándares de Contenido (Medida), estrechamente ligados al geométrico.</td>
+            </tr>
+            <tr>
+                <td class="type-cell">Aleatorio (Probabilístico)</td>
+                <td>Comprensión de la incertidumbre, el conteo, la estadística descriptiva e inferencial.</td>
+                <td>Énfasis moderno en data y probabilidad (influencia del <strong>NCTM y PISA</strong>).</td>
+            </tr>
+            <tr>
+                <td class="type-cell">Variacional</td>
+                <td>Reconocimiento, descripción y modelización de patrones, cambio y dependencia.</td>
+                <td>El eje más novedoso y distintivo.</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>
