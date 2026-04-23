@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dimensiones de Schoenfeld 2x2</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-blue: #00d2ff;
+            --deep-dark: #040911;
+            --card-bg: rgba(255, 255, 255, 0.06);
+            --neon-shadow: 0 0 20px rgba(0, 210, 255, 0.4);
+        }
+
+        body {
+            background-color: var(--deep-dark);
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(0, 210, 255, 0.1) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(0, 210, 255, 0.05) 0px, transparent 50%);
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            color: white;
+        }
+
+        /* Instrucción Flotante */
+        .instruction-bar {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 210, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 10px 20px;
+            border-radius: 12px;
+            border: 1px solid rgba(0, 210, 255, 0.5);
+            font-size: 0.8rem;
+            color: var(--primary-blue);
+            box-shadow: var(--neon-shadow);
+            z-index: 100;
+            letter-spacing: 1px;
+        }
+
+        /* Contenedor 2x2 */
+        .grid-2x2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* Fuerza 2 columnas */
+            gap: 25px;
+            width: 90%;
+            max-width: 900px;
+            padding: 40px 0;
+        }
+
+        /* Tarjeta Flip */
+        .card {
+            height: 280px;
+            perspective: 1000px;
+            cursor: pointer;
+        }
+
+        .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            transform-style: preserve-3d;
+        }
+
+        .card.is-active .card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+            box-sizing: border-box;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+        }
+
+        .card-back {
+            transform: rotateY(180deg);
+            background: rgba(0, 210, 255, 0.05);
+            border: 1px solid rgba(0, 210, 255, 0.3);
+            text-align: center;
+        }
+
+        /* Iconos y Texto */
+        .card-front i {
+            font-size: 3rem;
+            color: var(--primary-blue);
+            filter: drop-shadow(0 0 10px var(--primary-blue));
+            margin-bottom: 15px;
+        }
+
+        h2 {
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin: 0;
+            font-weight: 600;
+        }
+
+        p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            font-weight: 300;
+            color: #d1d1d1;
+        }
+
+        /* Responsive para móviles */
+        @media (max-width: 768px) {
+            .grid-2x2 {
+                grid-template-columns: 1fr; /* 1 columna en móviles */
+                max-width: 400px;
+            }
+            .instruction-bar {
+                left: 20px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="instruction-bar">
+        <i class="fa-solid fa-circle-info"></i> Haga clic sobre las tarjetas para ampliar la información.
+    </div>
+
+    <div class="grid-2x2">
+        
+        <div class="card" onclick="toggleCard(this)">
+            <div class="card-inner">
+                <div class="card-front">
+                    <i class="fa-solid fa-cube"></i>
+                    <h2>Recursos</h2>
+                </div>
+                <div class="card-back">
+                    <p>El conocimiento matemático factual (hechos, algoritmos, procedimientos).</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card" onclick="toggleCard(this)">
+            <div class="card-inner">
+                <div class="card-front">
+                    <i class="fa-solid fa-compass"></i>
+                    <h2>Heurísticas</h2>
+                </div>
+                <div class="card-back">
+                    <p>Estrategias y técnicas para avanzar en el problema (el modelo de Pólya).</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card" onclick="toggleCard(this)">
+            <div class="card-inner">
+                <div class="card-front">
+                    <i class="fa-solid fa-microchip"></i>
+                    <h2>Control (Metacognición)</h2>
+                </div>
+                <div class="card-back">
+                    <p>La capacidad de monitorear y autorregular el proceso de solución. Esta es la diferencia clave entre un experto y un novato.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card" onclick="toggleCard(this)">
+            <div class="card-inner">
+                <div class="card-front">
+                    <i class="fa-solid fa-shield-halved"></i>
+                    <h2>Sistema de Creencias</h2>
+                </div>
+                <div class="card-back">
+                    <p>La visión del estudiante sobre la naturaleza de las matemáticas, de sí mismo como solucionador, y del aprendizaje. Las creencias negativas inhiben el proceso.</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function toggleCard(cardElement) {
+            // Cerramos cualquier otra tarjeta abierta
+            document.querySelectorAll('.card').forEach(c => {
+                if (c !== cardElement) c.classList.remove('is-active');
+            });
+            // Alternamos la actual
+            cardElement.classList.toggle('is-active');
+        }
+    </script>
+
+</body>
+</html>
