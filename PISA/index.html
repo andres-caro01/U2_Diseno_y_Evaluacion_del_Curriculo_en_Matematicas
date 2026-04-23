@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-neon: #00d2ff;
+            --secondary-neon: #3a7bd5;
+            --glass-bg: rgba(255, 255, 255, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.4);
+            --text-dark: #1a1a2e;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: radial-gradient(circle at top left, #e0eafc, #cfdef3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        .container {
+            display: flex;
+            gap: 25px;
+            width: 90%;
+            max-width: 1200px;
+            perspective: 1000px;
+        }
+
+        .arrow-card {
+            flex: 1;
+            position: relative;
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 60px 25px 35px 35px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            opacity: 0;
+            transform: translateY(40px) rotateX(-10deg);
+            animation: reveal var(--anim-speed, 0.8s) forwards ease-out;
+        }
+
+        /* Animación de construcción */
+        @keyframes reveal {
+            to {
+                opacity: 1;
+                transform: translateY(0) rotateX(0);
+            }
+        }
+
+        .arrow-card:nth-child(1) { animation-delay: 0.2s; }
+        .arrow-card:nth-child(2) { animation-delay: 0.5s; }
+        .arrow-card:nth-child(3) { animation-delay: 0.8s; }
+
+        .arrow-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(58, 123, 213, 0.15);
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        /* Cabezal tipo flecha moderno */
+        .arrow-head {
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            width: 70px;
+            height: 45px;
+            background: linear-gradient(135deg, var(--primary-neon), var(--secondary-neon));
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.4rem;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 210, 255, 0.3);
+            clip-path: polygon(0% 0%, 80% 0%, 100% 50%, 80% 100%, 0% 100%);
+            z-index: 2;
+        }
+
+        /* Línea de conexión decorativa */
+        .arrow-card:not(:last-child)::after {
+            content: '→';
+            position: absolute;
+            right: -25px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2rem;
+            color: var(--secondary-neon);
+            opacity: 0.4;
+            font-weight: bold;
+        }
+
+        .content h3 {
+            margin: 10px 0 15px 0;
+            font-size: 1.5rem;
+            color: var(--text-dark);
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            position: relative;
+        }
+
+        .content h3::after {
+            content: '';
+            display: block;
+            width: 40px;
+            height: 4px;
+            background: var(--primary-neon);
+            border-radius: 2px;
+            margin-top: 8px;
+        }
+
+        .content p {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: #555;
+            margin: 0;
+            font-weight: 300;
+        }
+
+        /* Efecto de brillo en el borde al hacer hover */
+        .arrow-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            border-radius: 20px;
+            padding: 2px;
+            background: linear-gradient(135deg, transparent, var(--glass-border), transparent);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+
+        @media (max-width: 768px) {
+            .container { flex-direction: column; align-items: center; }
+            .arrow-card { width: 100%; margin-bottom: 20px; }
+            .arrow-card:not(:last-child)::after { content: '↓'; right: 50%; top: auto; bottom: -25px; transform: translateX(50%); }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="arrow-card">
+        <div class="arrow-head">1</div>
+        <div class="content">
+            <h3>Formular</h3>
+            <p>Transformar un problema real en un modelo matemático.</p>
+        </div>
+    </div>
+
+    <div class="arrow-card">
+        <div class="arrow-head">2</div>
+        <div class="content">
+            <h3>Emplear</h3>
+            <p>Utilizar conceptos, procedimientos y herramientas matemáticas para resolver el modelo.</p>
+        </div>
+    </div>
+
+    <div class="arrow-card">
+        <div class="arrow-head">3</div>
+        <div class="content">
+            <h3>Interpretar</h3>
+            <p>Evaluar los resultados matemáticos y traducirlos de vuelta al contexto real.</p>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
