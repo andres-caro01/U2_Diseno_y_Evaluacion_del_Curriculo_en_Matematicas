@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acordeón Tecnológico: Método de Resolución de Problemas</title>
+    <style>
+        /* --- Reset y Estilos Base --- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #010409; /* Fondo muy oscuro, espacial */
+            color: #e6edf3;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            overflow: hidden; /* Evitar barras de desplazamiento si es posible */
+        }
+
+        /* --- Contenedor Principal (Panel de Control) --- */
+        .tech-panel {
+            position: relative;
+            width: 100%;
+            max-width: 900px;
+            background: rgba(10, 15, 25, 0.9);
+            border: 2px solid #00f2fe; /* Borde cian neón */
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(0, 242, 254, 0.3), inset 0 0 10px rgba(0, 242, 254, 0.1);
+            padding: 40px;
+            overflow: visible; /* Permitir que la instrucción flote fuera */
+        }
+
+        /* Rejilla de fondo sutil para el panel */
+        .tech-panel::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: 
+                linear-gradient(rgba(0, 242, 254, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 242, 254, 0.05) 1px, transparent 1px);
+            background-size: 20px 20px;
+            border-radius: 10px;
+            z-index: -1;
+        }
+
+        /* --- Instrucción Flotante --- */
+        .floating-instruction {
+            position: absolute;
+            top: -25px;
+            right: 20px;
+            background-color: #00f2fe;
+            color: #010409;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            box-shadow: 0 0 15px rgba(0, 242, 254, 0.6);
+            z-index: 10;
+            pointer-events: none; /* No interfiere con clics */
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 15px rgba(0, 242, 254, 0.6); }
+            50% { transform: scale(1.05); box-shadow: 0 0 25px rgba(0, 242, 254, 0.9); }
+            100% { transform: scale(1); box-shadow: 0 0 15px rgba(0, 242, 254, 0.6); }
+        }
+
+        /* --- Estilos del Acordeón --- */
+        .accordion {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* Dos columnas como en la imagen */
+            gap: 20px;
+        }
+
+        .accordion-item {
+            background: rgba(20, 30, 50, 0.5);
+            border: 1px solid rgba(0, 242, 254, 0.2);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .accordion-item:hover {
+            border-color: rgba(0, 242, 254, 0.5);
+            background: rgba(20, 30, 50, 0.8);
+            box-shadow: 0 0 10px rgba(0, 242, 254, 0.2);
+        }
+
+        /* Cabecera del Acordeón (Botón) */
+        .accordion-header {
+            width: 100%;
+            background: none;
+            border: none;
+            color: #e6edf3;
+            padding: 15px 20px;
+            text-align: left;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 1.1rem;
+            font-weight: 600;
+            outline: none;
+            transition: background 0.3s ease;
+        }
+
+        .accordion-header-content {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        /* Contenedor del Icono (Círculo) */
+        .icon-container {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid rgba(0, 242, 254, 0.5);
+            background: rgba(0, 242, 254, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 10px rgba(0, 242, 254, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .accordion-item.active .icon-container {
+            background: #00f2fe;
+            box-shadow: 0 0 15px #00f2fe;
+        }
+
+        /* SVGs de Iconos (reemplazando los de la imagen) */
+        .icon-svg {
+            width: 20px;
+            height: 20px;
+            fill: #e6edf3;
+            transition: fill 0.3s ease;
+        }
+
+        .accordion-item.active .icon-svg {
+            fill: #010409;
+        }
+
+        /* Signo Más / Menos */
+        .plus-minus {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #00f2fe;
+            transition: transform 0.3s ease;
+        }
+
+        .accordion-item.active .plus-minus {
+            transform: rotate(45deg); /* Gira para parecer una X o menos */
+            color: #ff0055; /* Color de acento de parada */
+        }
+
+        /* Contenido del Acordeón (Oculto por defecto) */
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            background: rgba(10, 15, 25, 0.5);
+            border-top: 1px solid rgba(0, 242, 254, 0.1);
+        }
+
+        .accordion-item.active .accordion-content {
+            max-height: 200px; /* Ajustar según el contenido */
+        }
+
+        .accordion-body {
+            padding: 20px;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: rgba(230, 237, 243, 0.8);
+        }
+
+        /* --- Títulos Específicos (colores neón) --- */
+        .title-comprender { color: #00f2fe; } /* Cian */
+        .title-concebir { color: #ff0055; }   /* Magenta/Rojo */
+        .title-ejecutar { color: #4ae3b5; }   /* Verde Menta */
+        .title-examinar { color: #8e44ad; }   /* Morado */
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .accordion {
+                grid-template-columns: 1fr;
+            }
+            .tech-panel {
+                padding: 30px 20px;
+            }
+            .floating-instruction {
+                font-size: 0.75rem;
+                top: -20px;
+                right: 10px;
+                padding: 6px 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="tech-panel">
+        
+        <div class="floating-instruction">Haga clic sobre el signo mas para ampliar la información</div>
+
+        <div class="accordion">
+
+            <div class="accordion-item">
+                <button class="accordion-header">
+                    <div class="accordion-header-content">
+                        <div class="icon-container">
+                            <svg class="icon-svg" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+                        </div>
+                        <span class="title-comprender">Comprender el problema</span>
+                    </div>
+                    <span class="plus-minus">+</span>
+                </button>
+                <div class="accordion-content">
+                    <div class="accordion-body">
+                        Identificar lo desconocido, los datos y las condiciones.
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <button class="accordion-header">
+                    <div class="accordion-header-content">
+                        <div class="icon-container">
+                            <svg class="icon-svg" viewBox="0 0 24 24"><path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7zm2.85 11.1l-.85.6V16h-4v-2.3l-.85-.6C7.8 12.16 7 10.63 7 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.63-.8 3.16-2.15 4.1z"/></svg>
+                        </div>
+                        <span class="title-concebir">Concebir un plan</span>
+                    </div>
+                    <span class="plus-minus">+</span>
+                </button>
+                <div class="accordion-content">
+                    <div class="accordion-body">
+                        Buscar una conexión entre los datos y lo desconocido (uso de heurísticas como analogía, generalización, especialización, etc.).
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <button class="accordion-header">
+                    <div class="accordion-header-content">
+                        <div class="icon-container">
+                            <svg class="icon-svg" viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58a.49.49 0 0 0 .12-.61l-1.92-3.32a.488.488 0 0 0-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54a.484.484 0 0 0-.48-.41h-3.84a.483.483 0 0 0-.48.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58a.49.49 0 0 0-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.48-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32a.48.48 0 0 0-.12-.61l-2.03-1.58zM12 15.5c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z"/></svg>
+                        </div>
+                        <span class="title-ejecutar">Ejecutar el plan</span>
+                    </div>
+                    <span class="plus-minus">+</span>
+                </button>
+                <div class="accordion-content">
+                    <div class="accordion-body">
+                        Llevar a cabo los pasos del plan, revisando la ejecución.
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <button class="accordion-header">
+                    <div class="accordion-header-content">
+                        <div class="icon-container">
+                            <svg class="icon-svg" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                        </div>
+                        <span class="title-examinar">Examinar la solución</span>
+                    </div>
+                    <span class="plus-minus">+</span>
+                </button>
+                <div class="accordion-content">
+                    <div class="accordion-body">
+                        Comprobar el resultado, reflexionar y buscar si se puede usar el resultado o el método en otro problema.
+                    </div>
+                </div>
+            </div>
+
+        </div> </div> <script>
+        // --- Lógica JavaScript para el Acordeón ---
+        const accordionItems = document.querySelectorAll('.accordion-item');
+
+        accordionItems.forEach(item => {
+            const header = item.querySelector('.accordion-header');
+            
+            header.addEventListener('click', () => {
+                // Comprobar si el ítem actual ya está activo
+                const isActive = item.classList.contains('active');
+
+                // Cerrar todos los ítems abiertos (opcional, para comportamiento de acordeón clásico)
+                // accordionItems.forEach(otherItem => {
+                //    otherItem.classList.remove('active');
+                // });
+
+                // Alternar la clase activo en el ítem clicado
+                if (!isActive) {
+                    item.classList.add('active');
+                } else {
+                    item.classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
